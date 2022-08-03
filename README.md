@@ -16,6 +16,6 @@ You can assume that all User I/O with this "API" will be done so through the com
 - Cart
 - Order
 - User
-- Product
+- Item
 
 ## Reading Material
