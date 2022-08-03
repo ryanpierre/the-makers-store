@@ -4,21 +4,22 @@ import scala.collection.mutable.ArrayBuffer
 import main.model.Item
 import scala.collection.mutable.LinkedHashMap
 
+//TODO: This needs to be refactored and tested properly, but it works for now
 object DbAdapter {
-  def read(table: String): ArrayBuffer[ujson.Obj] = {
+  private def read(table: String): ArrayBuffer[ujson.Obj] = {
     val filename = table + ".json"
     val jsonString = os.read(os.pwd/"src"/"main"/"resources"/filename)
     val data = ujson.read(jsonString)
     data.value.asInstanceOf[ArrayBuffer[ujson.Obj]]
   }
 
-  def readRaw(table: String): ujson.Arr = {
+  private def readRaw(table: String): ujson.Arr = {
     val filename = table + ".json"
     val jsonString = os.read(os.pwd/"src"/"main"/"resources"/filename)
     ujson.read(jsonString).asInstanceOf[ujson.Arr]
   }
 
-  def write(table: String, data: ArrayBuffer[Item]) = {
+  private def write(table: String, data: ArrayBuffer[Item]) = {
     val filename = table + ".json"
 
     val newData = ujson.Arr.from(data.map(item => {
@@ -35,7 +36,7 @@ object DbAdapter {
     os.write(os.pwd/"src"/"main"/"resources"/filename, newData)
   }
 
-  def reset: Unit = {
+  def dropAndReset: Unit = {
     os.remove(os.pwd/"src"/"main"/"resources"/"items.json")
     os.write(os.pwd/"src"/"main"/"resources"/"items.json", os.read(os.pwd/"src"/"main"/"resources"/"items.base.json"))
   }
