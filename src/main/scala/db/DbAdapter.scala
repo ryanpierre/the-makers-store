@@ -4,7 +4,7 @@ import scala.collection.mutable.ArrayBuffer
 import main.model.Item
 import scala.collection.mutable.LinkedHashMap
 
-class DbAdapter {
+object DbAdapter {
   def read(table: String): ArrayBuffer[ujson.Obj] = {
     val filename = table + ".json"
     val jsonString = os.read(os.pwd/"src"/"main"/"resources"/filename)
@@ -41,7 +41,7 @@ class DbAdapter {
   }
 
   def getItems(): ArrayBuffer[Item] = {
-    val db = this.read("items")
+    val db = DbAdapter.read("items")
 
     db.map(item => {
       val id = item("id").value.asInstanceOf[Double].toInt
@@ -54,13 +54,13 @@ class DbAdapter {
   }
 
   def updateItem(id: Int, newItem: Item): Unit = {
-    val items = this.getItems()
+    val items = DbAdapter.getItems()
     val newData = items.map(i => i.id match {
       case x if x == id => newItem
       case _ => i
     })
 
-    this.write("items", newData)
+    DbAdapter.write("items", newData)
   }
 
   def createItem(newItem: Item): Unit = {
@@ -72,7 +72,7 @@ class DbAdapter {
       val newJsonObj = LinkedHashMap("id" -> id, "name" -> name, "price" -> price, "quantity" -> quantity, "availableLocales" -> availableLocales)
       val newJson = ujson.Value(newJsonObj)
 
-      val db = this.readRaw("items")
+      val db = DbAdapter.readRaw("items")
       db.arr.append(newJson)
 
       os.remove(os.pwd/"src"/"main"/"resources"/"items.json")
