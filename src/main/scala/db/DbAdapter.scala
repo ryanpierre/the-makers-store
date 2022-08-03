@@ -12,6 +12,16 @@ class DbAdapter {
     data.value.asInstanceOf[ArrayBuffer[ujson.Obj]]
   }
 
+  // TODO: Writes the new data to the database
+  def write[T](table: String, data: ArrayBuffer[T]) = {
+
+  }
+
+  // TODO: Cleans the database back to the base state
+  def flush: Boolean = {
+    true
+  }
+
   // TODO: This could be refactored to be passed the db as a param, and then mocked better in the test
   def getItems(): ArrayBuffer[Item] = {
     val db = this.read("items")
@@ -24,5 +34,15 @@ class DbAdapter {
       val locales = item("availableLocales").arr.map(_.value.asInstanceOf[String]).toList
       new Item(id, name, price, quantity, locales)
     })
+  }
+
+  // TODO: Replaces an item in the database with the matching id of the one we provided
+  def updateItem(id: Int, newItem: Item): Boolean = {
+    true
+  }
+
+  // TODO: Creates a new item in the database
+  def createItem(newItem: Item): Boolean = {
+    true
   }
 }
