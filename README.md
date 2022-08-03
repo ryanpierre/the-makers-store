@@ -12,4 +12,10 @@ You can assume that all User I/O with this "API" will be done so through the com
 
 ## Excercises
 
+### Classes to build
+- Cart
+- Order
+- User
+- Product
+
 ## Reading Material
