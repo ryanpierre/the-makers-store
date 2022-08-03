@@ -20,16 +20,15 @@ class DbAdapter {
 
   def write(table: String, data: ArrayBuffer[Item]) = {
     val filename = table + ".json"
-    val jsonString = os.read(os.pwd/"src"/"main"/"resources"/filename)
 
-    val newData = ujson.Arr(data.map(item => {
+    val newData = ujson.Arr.from(data.map(item => {
       val id = ujson.Num(item.id.toDouble)
       val name =  ujson.Str(item.name)
       val price =  ujson.Num(item.price.toDouble)
       val quantity = ujson.Num(item.quantity.toDouble)
-      val availableLocales = ujson.Value(ujson.Arr(item.availableLocales))
+      val availableLocales = ujson.Arr.from(item.availableLocales)
 
-      ujson.Obj(LinkedHashMap("id" -> id, "name" -> name, "price" -> price, "quantity" -> quantity, "availableLocales" -> availableLocales))
+      LinkedHashMap("id" -> id, "name" -> name, "price" -> price, "quantity" -> quantity, "availableLocales" -> availableLocales)
     }))
 
     os.remove(os.pwd/"src"/"main"/"resources"/"items.json")
@@ -69,10 +68,10 @@ class DbAdapter {
       val name =  ujson.Str(newItem.name)
       val price =  ujson.Num(newItem.price.toDouble)
       val quantity = ujson.Num(newItem.quantity.toDouble)
-      val availableLocales = new ujson.Arr(ArrayBuffer(newItem.availableLocales))
+      val availableLocales = ujson.Arr.from(newItem.availableLocales)
       val newJsonObj = LinkedHashMap("id" -> id, "name" -> name, "price" -> price, "quantity" -> quantity, "availableLocales" -> availableLocales)
       val newJson = ujson.Value(newJsonObj)
-      
+
       val db = this.readRaw("items")
       db.arr.append(newJson)
 
