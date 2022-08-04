@@ -63,11 +63,11 @@ You can assume all insert and update operations are successful.
   - [ ] We want to wire this up to the `PaymentAdapter`. Think of this as simulating a third party payment gateway like Paypal - we just need to pass the total amount to be charged and it'll let us know whether it was successful or not
 
 **Stretch**
-- [ ] Add the ability to track all transactions that have occurred during a session. We'll define a session as starting the app, and then ending it. We don't need to store these in the database, but we do want to have a few functionalities
+- [ ] Add the ability to track all transactions that have occurred during a session. We'll define a session as starting the app, and then ending it. We don't need to store these in the database, but we do want to have a few functionalities. We may want to create a service so that we can store this information in memory, because the functionaities we'd like are:
   - [ ] Track total sales in a session
   - [ ] Track total sales per continent, region, and city
-  - [ ] Track the biggest selling item
-  - [ ] Generate a report with anything with 1 or less stock remaining
+  - [ ] Track the biggest selling item in a session
+  - [ ] Generate a report with the name of each item and how much quantity was sold (i.e. this should be a HashMap of (Name -> quantitySold))
   - [ ] Track the sum total amount of failed transactions in a session
 
   ### The Payment Adapter
