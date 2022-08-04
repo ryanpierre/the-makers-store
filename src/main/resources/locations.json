@@ -1,0 +1,54 @@
+{
+  "EU" : {
+    "UK" : [{
+      "id" : 0,
+      "name": "London"
+    },
+    {
+      "id" : 1,
+      "name": "Manchester"
+    }],
+    "FR" : [{
+      "id" : 2,
+      "name": "Paris"
+    },
+    {
+      "id" : 3,
+      "name": "Lyon"
+    }],
+    "ES" : [{
+      "id" : 4,
+      "name": "Madrid"
+    }],
+    "DE" : [{
+      "id" : 5,
+      "name": "Berlin"
+    },
+    {
+      "id" : 6,
+      "name": "Dusseldorf"
+    }],
+    "IT" : [{
+      "id" : 7,
+      "name": "Milan"
+    }]
+  },
+  "NA" : {
+    "US" : [{
+      "id" : 8,
+      "name": "New York"
+    },
+    {
+      "id" : 9,
+      "name": "Los Angeles"
+    }],
+    "CA" : [{
+      "id" : 10,
+      "name": "Toronto"
+    },
+    {
+      "id" : 11,
+      "name": "Vancouver"
+    }]
+  }
+}

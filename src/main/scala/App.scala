@@ -12,6 +12,7 @@ object App {
   }
 
   def data(): ArrayBuffer[Item] = {
+    DbAdapter.getLocations()
     DbAdapter.getItems()
   }
 }

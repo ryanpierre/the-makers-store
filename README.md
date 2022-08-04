@@ -11,11 +11,8 @@ You can assume that all User I/O with this "API" will be done so through the com
 ## A Tour of the Project
 
 ## Excercises
+- Traverse locations taxonomy to find the city the user input, then go back up the tree to find what region that city is in. If it's in an available locale, serve it, otherwise don't!
 
 ### Classes to build
-- Cart
-- Order
-- User
-- Item
 
 ## Reading Material
