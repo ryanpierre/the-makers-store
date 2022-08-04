@@ -10,9 +10,4 @@ object App {
   def start(): String = {
     "OK"
   }
-
-  def data(): ArrayBuffer[Item] = {
-    DbAdapter.getLocations()
-    DbAdapter.getItems()
-  }
 }
