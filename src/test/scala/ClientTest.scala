@@ -1,6 +1,9 @@
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.wordspec.AnyWordSpec
 
+//these tests make the item control tests irrelevant currently. However I
+//wont delete the item control tests just yet as more functionality will
+//most likely be added to this making them great if you just want to test specifics
 class ClientTest extends AnyWordSpec with Matchers {
   "Client" should {
     "receive all items when calling client -> all items" in {

@@ -4,6 +4,8 @@ import main.model.{Item, Location}
 import scala.collection.mutable.ArrayBuffer
 
 object Client {
+  //these are more or less temporary solutions as there is no user input currently.
+  //So in this case it simply serves as all possible functionality.
   def allItems: ArrayBuffer[Item] = {
     ItemController.fetchAllItems
   }
