@@ -1,9 +1,11 @@
+package controllers
+
 import main.db.DbAdapter
 import main.model.{Item, Location}
 
 import scala.collection.mutable.ArrayBuffer
 
-object TempBuilder {
+object ItemController {
   val db: DbAdapter.type = DbAdapter
 
   //fetch all items
