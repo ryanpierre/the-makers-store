@@ -1,27 +1,40 @@
 import main.db.DbAdapter
+import main.model.{Item, Location}
 
-class TempBuilder {
-  val db = DbAdapter
+import scala.collection.mutable.ArrayBuffer
+
+object TempBuilder {
+  val db: DbAdapter.type = DbAdapter
 
   //fetch all items
-  def fetchAllItems = db.getItems()
+  def fetchAllItems: ArrayBuffer[Item] = db.getItems()
   //fetch a specific item
-  def fetchItem(id: Int) = {
-    fetchAllItems.filter(item => item.id == id)
+  def fetchItem(id: Int): Item = {
+    fetchAllItems.filter(item => item.id == id).head
   }
-  //fetch all from specific location
-  def fetchItemsFromLocation(location: String) = {
+  //fetch all items from specific location
+  def fetchItemsFromLocation(location: String): ArrayBuffer[Item] = {
     fetchAllItems.filter(item => item.availableLocales.contains(location))
+    //not sure this is what was intended -> the exercise says to allow for
+    //this to be fetched via name or id -> my confusion stems from the items
+    //only storing a string for location data...
+    //so they can only be filtered by that... right?
   }
   //fetch all locations given a specific continent
-  def fetchLocationsFromContinent(continent: String) = {
+  def fetchLocationsFromContinent(continent: String): Seq[Location] = {
     //locations.json looks like this:
     /*
     * continent
     * |  country
-    * |  |  city
-    * |  |  |  id etc
+    * |  |  city <- what is meant by location (has an id and name property)
+    * |  |  |  id
+    * |  |  |  name
+    * |  |
+    * |  country
+    * |  | etc
     */
-    db.getLocations().filter(continentItem => continentItem._1 == continent).map(continentCollection => continentCollection._2.map(location => location._2))
+    val filteredContinent = db.getLocations().filter(x => x._1 == continent).head._2
+    val locations = filteredContinent.values.toSeq.flatten
+    locations
   }
 }
