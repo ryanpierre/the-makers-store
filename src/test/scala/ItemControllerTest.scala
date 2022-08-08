@@ -1,4 +1,5 @@
 import controllers.ItemController
+import main.model.Item
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.wordspec.AnyWordSpec
 
@@ -46,6 +47,24 @@ class ItemControllerTest extends AnyWordSpec with Matchers {
       locationsNames should contain("Dusseldorf")
       locationsNames should contain("Milan")
       assert(locationsNames.length == 8)
+    }
+    "create a new Item" in {
+      val controller = ItemController
+      val thisNewItem: Item = new Item(id = 999999, name = "Tom's Energy Drink", price = 1.5, quantity = 1, availableLocales = List("UK"))
+      controller.createItem(thisNewItem)
+      val fetchThisItem = controller.fetchItem(999999)
+      assert(fetchThisItem.name == thisNewItem.name)
+      assert(fetchThisItem.price == thisNewItem.price)
+      assert(fetchThisItem.quantity == thisNewItem.quantity)
+      assert(fetchThisItem.availableLocales == thisNewItem.availableLocales)
+    }
+    "update an existing item" in {
+      val controller = ItemController
+      val thisNewItem: Item = new Item(id = 999999, name = "Bob's Energy Drink", price = 1, quantity = 1, availableLocales = List("UK"))
+      controller.updateItem(999999, thisNewItem)
+      val updated = controller.fetchItem(999999)
+      assert(updated.name == thisNewItem.name)
+      assert(updated.price == thisNewItem.price)
     }
   }
 }

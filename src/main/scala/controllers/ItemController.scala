@@ -7,7 +7,13 @@ import scala.collection.mutable.ArrayBuffer
 
 object ItemController {
   val db: DbAdapter.type = DbAdapter
-
+  //create new item
+  def createItem(newItem: Item) = {
+    db.createItem(newItem)
+  }
+  def updateItem(itemId: Int, newItem: Item) = {
+    db.updateItem(itemId, newItem)
+  }
   //fetch all items
   def fetchAllItems: ArrayBuffer[Item] = db.getItems()
   //fetch a specific item
