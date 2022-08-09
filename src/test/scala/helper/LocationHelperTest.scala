@@ -1,4 +1,4 @@
-package main
+package main.helper
 
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.wordspec.AnyWordSpec
@@ -9,13 +9,12 @@ import scala.collection.mutable.LinkedHashMap
 import main.model.Location
 import main.model.Item
 import scala.collection.mutable.ArrayBuffer
-import main.helper.LocationHelperBase
 
-class ItemControllerTest extends AnyWordSpec with Matchers with MockFactory {
-  "An ItemController" should {
-    "Get all products available in a particular continent" which {
-      "returns a list of Items whose available locales match the continent the requested city is in" in {
-        val mockDbAdapter = mock[DbAdapterBase]
+class LocationHelperTest extends AnyWordSpec with Matchers with MockFactory {
+  "A LocationHelper" should {
+    "Retrieve what continent a particular city search is in" which {
+      "Given a location, returns a continent where the location resides" in {
+         val mockDbAdapter = mock[DbAdapterBase]
         val mockLocation1 = new Location(0, "Testville")
         val mockLocation2 = new Location(1, "Test Town")
         val mockLocation3 = new Location(2, "Testington")
@@ -38,8 +37,6 @@ class ItemControllerTest extends AnyWordSpec with Matchers with MockFactory {
         val mockItems =
           ArrayBuffer[Item]().appendAll(List(mockItem1, mockItem2, mockItem3))
 
-        val mockLocationHelper = mock[LocationHelperBase]
-
         (mockDbAdapter.getLocations _)
           .expects()
           .returning(
@@ -52,13 +49,7 @@ class ItemControllerTest extends AnyWordSpec with Matchers with MockFactory {
             mockItems
           )
 
-        (mockLocationHelper.getContinentFromLocation _)
-          .expects(mockLocations, "Testville")
-          .returning(
-            "NA"
-          )
-
-        val subject = new ItemController(mockDbAdapter, mockLocationHelper)
+        val subject = new ItemController(mockDbAdapter)
         val products = subject.getAvailableItemsByLocation("Testville")
 
         products shouldBe a[List[_]]
