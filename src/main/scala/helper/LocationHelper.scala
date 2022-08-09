@@ -20,11 +20,11 @@ trait LocationHelperBase {
 object LocationHelper extends LocationHelperBase {
   private def foldRegionToFlatLocation(
       flatLocs: Seq[FlatLocation],
-      lMapTuple: (String, Seq[Location]),
+      locationMap: (String, Seq[Location]),
       continent: String
   ) = {
 
-    val (region, locations) = lMapTuple
+    val (region, locations) = locationMap
 
     flatLocs ++ locations.map(l => {
       FlatLocation(l.id, l.name, continent, region)
