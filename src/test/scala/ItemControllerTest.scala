@@ -48,7 +48,7 @@ class ItemControllerTest extends AnyWordSpec with Matchers with MockFactory {
             mockItems
           )
 
-        val subject = new ItemController()
+        val subject = new ItemController(mockDbAdapter)
         val products = subject.getAvailableItemsByLocation("Testville")
 
         products shouldBe a[List[_]]
