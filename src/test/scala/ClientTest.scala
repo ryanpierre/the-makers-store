@@ -32,7 +32,7 @@ class ClientTest extends AnyWordSpec with Matchers {
     }
     "receive items available in a specific location when calling client -> itemsByLocation" in {
       val thisClient = Client
-      val itemNames = thisClient.itemsByLocation("UK").map(x => x.name)
+      val itemNames = thisClient.itemsByLocation("London").map(x => x.name)
       assert(itemNames.length == 1) // we only have one item available in the UK
       itemNames should contain("Orange Peel")
     }
